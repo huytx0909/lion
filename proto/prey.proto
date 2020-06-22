@@ -2,10 +2,14 @@ syntax = "proto3";
 
 package proto;
 
-//import "google/api/annotations.proto";
+import "google/api/annotations.proto";
 
 service LionService {
   rpc FindPrey(FindPreyRequest) returns (FindPreyResponse) {
+    option (google.api.http) = {
+      post: "/v1/example/echo"
+      body: "*"
+    };
   };
 }
 

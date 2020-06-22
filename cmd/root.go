@@ -34,6 +34,8 @@ func init() {
 
 	rootCmd.AddCommand(eatCmd)
 	rootCmd.AddCommand(serveCmd)
+	rootCmd.AddCommand(httpCmd)
+	rootCmd.AddCommand(grpcCmd)
 }
 
 func initConfig() {
