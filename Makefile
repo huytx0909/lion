@@ -1,3 +1,4 @@
+.PHONY: proto
 hello:
 	echo "hello"
 
@@ -11,3 +12,5 @@ http:
 grpc:
 	echo "starting grpc server"
 	bin/lion grpc
+proto:
+	./regenerate.sh

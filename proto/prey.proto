@@ -5,18 +5,33 @@ package proto;
 import "google/api/annotations.proto";
 
 service LionService {
-  rpc FindPrey(FindPreyRequest) returns (FindPreyResponse) {
+  rpc AddPrey (AddPreyRequest) returns (AddPreyResponse) {
     option (google.api.http) = {
-      post: "/v1/example/echo"
+      post: "/v1/prey"
       body: "*"
+    };
+  };
+
+  rpc GetPrey (GetPreyRequest) returns (GetPreyResponse) {
+    option (google.api.http) = {
+      get: "/v1/prey/{id}"
     };
   };
 }
 
-message FindPreyRequest {
+message AddPreyRequest {
   string prey_name = 1;
 }
 
-message FindPreyResponse {
+message AddPreyResponse {
   string prey_name = 1;
+}
+
+message GetPreyRequest {
+  string id = 1;
+}
+
+message GetPreyResponse {
+  string prey_name = 1;
+  string status = 2;
 }
