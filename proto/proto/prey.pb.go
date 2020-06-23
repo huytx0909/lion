@@ -7,6 +7,7 @@ import (
 	context "context"
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -24,130 +25,236 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
-type FindPreyRequest struct {
+type AddPreyRequest struct {
 	PreyName             string   `protobuf:"bytes,1,opt,name=prey_name,json=preyName,proto3" json:"prey_name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *FindPreyRequest) Reset()         { *m = FindPreyRequest{} }
-func (m *FindPreyRequest) String() string { return proto.CompactTextString(m) }
-func (*FindPreyRequest) ProtoMessage()    {}
-func (*FindPreyRequest) Descriptor() ([]byte, []int) {
+func (m *AddPreyRequest) Reset()         { *m = AddPreyRequest{} }
+func (m *AddPreyRequest) String() string { return proto.CompactTextString(m) }
+func (*AddPreyRequest) ProtoMessage()    {}
+func (*AddPreyRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ae98a371d11dcf42, []int{0}
 }
 
-func (m *FindPreyRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_FindPreyRequest.Unmarshal(m, b)
+func (m *AddPreyRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AddPreyRequest.Unmarshal(m, b)
 }
-func (m *FindPreyRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_FindPreyRequest.Marshal(b, m, deterministic)
+func (m *AddPreyRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AddPreyRequest.Marshal(b, m, deterministic)
 }
-func (m *FindPreyRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_FindPreyRequest.Merge(m, src)
+func (m *AddPreyRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddPreyRequest.Merge(m, src)
 }
-func (m *FindPreyRequest) XXX_Size() int {
-	return xxx_messageInfo_FindPreyRequest.Size(m)
+func (m *AddPreyRequest) XXX_Size() int {
+	return xxx_messageInfo_AddPreyRequest.Size(m)
 }
-func (m *FindPreyRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_FindPreyRequest.DiscardUnknown(m)
+func (m *AddPreyRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddPreyRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_FindPreyRequest proto.InternalMessageInfo
+var xxx_messageInfo_AddPreyRequest proto.InternalMessageInfo
 
-func (m *FindPreyRequest) GetPreyName() string {
+func (m *AddPreyRequest) GetPreyName() string {
 	if m != nil {
 		return m.PreyName
 	}
 	return ""
 }
 
-type FindPreyResponse struct {
+type AddPreyResponse struct {
 	PreyName             string   `protobuf:"bytes,1,opt,name=prey_name,json=preyName,proto3" json:"prey_name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *FindPreyResponse) Reset()         { *m = FindPreyResponse{} }
-func (m *FindPreyResponse) String() string { return proto.CompactTextString(m) }
-func (*FindPreyResponse) ProtoMessage()    {}
-func (*FindPreyResponse) Descriptor() ([]byte, []int) {
+func (m *AddPreyResponse) Reset()         { *m = AddPreyResponse{} }
+func (m *AddPreyResponse) String() string { return proto.CompactTextString(m) }
+func (*AddPreyResponse) ProtoMessage()    {}
+func (*AddPreyResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ae98a371d11dcf42, []int{1}
 }
 
-func (m *FindPreyResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_FindPreyResponse.Unmarshal(m, b)
+func (m *AddPreyResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AddPreyResponse.Unmarshal(m, b)
 }
-func (m *FindPreyResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_FindPreyResponse.Marshal(b, m, deterministic)
+func (m *AddPreyResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AddPreyResponse.Marshal(b, m, deterministic)
 }
-func (m *FindPreyResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_FindPreyResponse.Merge(m, src)
+func (m *AddPreyResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddPreyResponse.Merge(m, src)
 }
-func (m *FindPreyResponse) XXX_Size() int {
-	return xxx_messageInfo_FindPreyResponse.Size(m)
+func (m *AddPreyResponse) XXX_Size() int {
+	return xxx_messageInfo_AddPreyResponse.Size(m)
 }
-func (m *FindPreyResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_FindPreyResponse.DiscardUnknown(m)
+func (m *AddPreyResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddPreyResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_FindPreyResponse proto.InternalMessageInfo
+var xxx_messageInfo_AddPreyResponse proto.InternalMessageInfo
 
-func (m *FindPreyResponse) GetPreyName() string {
+func (m *AddPreyResponse) GetPreyName() string {
 	if m != nil {
 		return m.PreyName
+	}
+	return ""
+}
+
+type GetPreyRequest struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetPreyRequest) Reset()         { *m = GetPreyRequest{} }
+func (m *GetPreyRequest) String() string { return proto.CompactTextString(m) }
+func (*GetPreyRequest) ProtoMessage()    {}
+func (*GetPreyRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ae98a371d11dcf42, []int{2}
+}
+
+func (m *GetPreyRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetPreyRequest.Unmarshal(m, b)
+}
+func (m *GetPreyRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetPreyRequest.Marshal(b, m, deterministic)
+}
+func (m *GetPreyRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetPreyRequest.Merge(m, src)
+}
+func (m *GetPreyRequest) XXX_Size() int {
+	return xxx_messageInfo_GetPreyRequest.Size(m)
+}
+func (m *GetPreyRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetPreyRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetPreyRequest proto.InternalMessageInfo
+
+func (m *GetPreyRequest) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type GetPreyResponse struct {
+	PreyName             string   `protobuf:"bytes,1,opt,name=prey_name,json=preyName,proto3" json:"prey_name,omitempty"`
+	Status               string   `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetPreyResponse) Reset()         { *m = GetPreyResponse{} }
+func (m *GetPreyResponse) String() string { return proto.CompactTextString(m) }
+func (*GetPreyResponse) ProtoMessage()    {}
+func (*GetPreyResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ae98a371d11dcf42, []int{3}
+}
+
+func (m *GetPreyResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetPreyResponse.Unmarshal(m, b)
+}
+func (m *GetPreyResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetPreyResponse.Marshal(b, m, deterministic)
+}
+func (m *GetPreyResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetPreyResponse.Merge(m, src)
+}
+func (m *GetPreyResponse) XXX_Size() int {
+	return xxx_messageInfo_GetPreyResponse.Size(m)
+}
+func (m *GetPreyResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetPreyResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetPreyResponse proto.InternalMessageInfo
+
+func (m *GetPreyResponse) GetPreyName() string {
+	if m != nil {
+		return m.PreyName
+	}
+	return ""
+}
+
+func (m *GetPreyResponse) GetStatus() string {
+	if m != nil {
+		return m.Status
 	}
 	return ""
 }
 
 func init() {
-	proto.RegisterType((*FindPreyRequest)(nil), "proto.FindPreyRequest")
-	proto.RegisterType((*FindPreyResponse)(nil), "proto.FindPreyResponse")
+	proto.RegisterType((*AddPreyRequest)(nil), "proto.AddPreyRequest")
+	proto.RegisterType((*AddPreyResponse)(nil), "proto.AddPreyResponse")
+	proto.RegisterType((*GetPreyRequest)(nil), "proto.GetPreyRequest")
+	proto.RegisterType((*GetPreyResponse)(nil), "proto.GetPreyResponse")
 }
 
 func init() { proto.RegisterFile("proto/prey.proto", fileDescriptor_ae98a371d11dcf42) }
 
 var fileDescriptor_ae98a371d11dcf42 = []byte{
-	// 142 bytes of a gzipped FileDescriptorProto
+	// 257 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x28, 0x28, 0xca, 0x2f,
-	0xc9, 0xd7, 0x2f, 0x28, 0x4a, 0xad, 0xd4, 0x03, 0x33, 0x85, 0x58, 0xc1, 0x94, 0x92, 0x1e, 0x17,
-	0xbf, 0x5b, 0x66, 0x5e, 0x4a, 0x40, 0x51, 0x6a, 0x65, 0x50, 0x6a, 0x61, 0x69, 0x6a, 0x71, 0x89,
-	0x90, 0x34, 0x17, 0x27, 0x48, 0x5d, 0x7c, 0x5e, 0x62, 0x6e, 0xaa, 0x04, 0xa3, 0x02, 0xa3, 0x06,
-	0x67, 0x10, 0x07, 0x48, 0xc0, 0x2f, 0x31, 0x37, 0x55, 0x49, 0x9f, 0x4b, 0x00, 0xa1, 0xbe, 0xb8,
-	0x20, 0x3f, 0xaf, 0x38, 0x15, 0xaf, 0x06, 0x23, 0x1f, 0x2e, 0x6e, 0x9f, 0xcc, 0xfc, 0xbc, 0xe0,
-	0xd4, 0xa2, 0xb2, 0xcc, 0xe4, 0x54, 0x21, 0x5b, 0x2e, 0x0e, 0x98, 0x7e, 0x21, 0x31, 0x88, 0x53,
-	0xf4, 0xd0, 0x1c, 0x20, 0x25, 0x8e, 0x21, 0x0e, 0xb1, 0x48, 0x89, 0x21, 0x89, 0x0d, 0x2c, 0x63,
-	0x0c, 0x08, 0x00, 0x00, 0xff, 0xff, 0x74, 0xda, 0xdb, 0x06, 0xd0, 0x00, 0x00, 0x00,
+	0xc9, 0xd7, 0x2f, 0x28, 0x4a, 0xad, 0xd4, 0x03, 0x33, 0x85, 0x58, 0xc1, 0x94, 0x94, 0x4c, 0x7a,
+	0x7e, 0x7e, 0x7a, 0x4e, 0xaa, 0x7e, 0x62, 0x41, 0xa6, 0x7e, 0x62, 0x5e, 0x5e, 0x7e, 0x49, 0x62,
+	0x49, 0x66, 0x7e, 0x5e, 0x31, 0x44, 0x91, 0x92, 0x2e, 0x17, 0x9f, 0x63, 0x4a, 0x4a, 0x40, 0x51,
+	0x6a, 0x65, 0x50, 0x6a, 0x61, 0x69, 0x6a, 0x71, 0x89, 0x90, 0x34, 0x17, 0x27, 0xc8, 0x90, 0xf8,
+	0xbc, 0xc4, 0xdc, 0x54, 0x09, 0x46, 0x05, 0x46, 0x0d, 0xce, 0x20, 0x0e, 0x90, 0x80, 0x5f, 0x62,
+	0x6e, 0xaa, 0x92, 0x1e, 0x17, 0x3f, 0x5c, 0x79, 0x71, 0x41, 0x7e, 0x5e, 0x71, 0x2a, 0x7e, 0xf5,
+	0x0a, 0x5c, 0x7c, 0xee, 0xa9, 0x25, 0xc8, 0xc6, 0xf3, 0x71, 0x31, 0x65, 0xa6, 0x40, 0xd5, 0x31,
+	0x65, 0xa6, 0x28, 0xb9, 0x71, 0xf1, 0xc3, 0x55, 0x10, 0x61, 0xa2, 0x90, 0x18, 0x17, 0x5b, 0x71,
+	0x49, 0x62, 0x49, 0x69, 0xb1, 0x04, 0x13, 0x58, 0x06, 0xca, 0x33, 0x5a, 0xcb, 0xc8, 0xc5, 0xed,
+	0x93, 0x99, 0x9f, 0x17, 0x9c, 0x5a, 0x54, 0x96, 0x99, 0x9c, 0x2a, 0xe4, 0xcb, 0xc5, 0x0e, 0x75,
+	0xa9, 0x90, 0x28, 0xc4, 0xaf, 0x7a, 0xa8, 0x1e, 0x95, 0x12, 0x43, 0x17, 0x86, 0x58, 0xaf, 0x24,
+	0xdc, 0x74, 0xf9, 0xc9, 0x64, 0x26, 0x5e, 0x25, 0x0e, 0xfd, 0x32, 0x43, 0x70, 0x78, 0x5a, 0x31,
+	0x6a, 0x09, 0xf9, 0x73, 0xb1, 0x43, 0x9d, 0x09, 0x37, 0x0e, 0xd5, 0x63, 0x70, 0xe3, 0xd0, 0x7c,
+	0xa3, 0x24, 0x0a, 0x36, 0x8e, 0x5f, 0x88, 0x17, 0x66, 0x9c, 0x7e, 0x75, 0x66, 0x4a, 0x6d, 0x12,
+	0x1b, 0x58, 0xb5, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0xa3, 0x2f, 0x7f, 0x68, 0xb8, 0x01, 0x00,
+	0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ context.Context
-var _ grpc.ClientConn
+var _ grpc.ClientConnInterface
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion4
+const _ = grpc.SupportPackageIsVersion6
 
 // LionServiceClient is the client API for LionService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type LionServiceClient interface {
-	FindPrey(ctx context.Context, in *FindPreyRequest, opts ...grpc.CallOption) (*FindPreyResponse, error)
+	AddPrey(ctx context.Context, in *AddPreyRequest, opts ...grpc.CallOption) (*AddPreyResponse, error)
+	GetPrey(ctx context.Context, in *GetPreyRequest, opts ...grpc.CallOption) (*GetPreyResponse, error)
 }
 
 type lionServiceClient struct {
-	cc *grpc.ClientConn
+	cc grpc.ClientConnInterface
 }
 
-func NewLionServiceClient(cc *grpc.ClientConn) LionServiceClient {
+func NewLionServiceClient(cc grpc.ClientConnInterface) LionServiceClient {
 	return &lionServiceClient{cc}
 }
 
-func (c *lionServiceClient) FindPrey(ctx context.Context, in *FindPreyRequest, opts ...grpc.CallOption) (*FindPreyResponse, error) {
-	out := new(FindPreyResponse)
-	err := c.cc.Invoke(ctx, "/proto.LionService/FindPrey", in, out, opts...)
+func (c *lionServiceClient) AddPrey(ctx context.Context, in *AddPreyRequest, opts ...grpc.CallOption) (*AddPreyResponse, error) {
+	out := new(AddPreyResponse)
+	err := c.cc.Invoke(ctx, "/proto.LionService/AddPrey", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lionServiceClient) GetPrey(ctx context.Context, in *GetPreyRequest, opts ...grpc.CallOption) (*GetPreyResponse, error) {
+	out := new(GetPreyResponse)
+	err := c.cc.Invoke(ctx, "/proto.LionService/GetPrey", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -156,35 +263,57 @@ func (c *lionServiceClient) FindPrey(ctx context.Context, in *FindPreyRequest, o
 
 // LionServiceServer is the server API for LionService service.
 type LionServiceServer interface {
-	FindPrey(context.Context, *FindPreyRequest) (*FindPreyResponse, error)
+	AddPrey(context.Context, *AddPreyRequest) (*AddPreyResponse, error)
+	GetPrey(context.Context, *GetPreyRequest) (*GetPreyResponse, error)
 }
 
 // UnimplementedLionServiceServer can be embedded to have forward compatible implementations.
 type UnimplementedLionServiceServer struct {
 }
 
-func (*UnimplementedLionServiceServer) FindPrey(ctx context.Context, req *FindPreyRequest) (*FindPreyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FindPrey not implemented")
+func (*UnimplementedLionServiceServer) AddPrey(ctx context.Context, req *AddPreyRequest) (*AddPreyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddPrey not implemented")
+}
+func (*UnimplementedLionServiceServer) GetPrey(ctx context.Context, req *GetPreyRequest) (*GetPreyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPrey not implemented")
 }
 
 func RegisterLionServiceServer(s *grpc.Server, srv LionServiceServer) {
 	s.RegisterService(&_LionService_serviceDesc, srv)
 }
 
-func _LionService_FindPrey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FindPreyRequest)
+func _LionService_AddPrey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddPreyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(LionServiceServer).FindPrey(ctx, in)
+		return srv.(LionServiceServer).AddPrey(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.LionService/FindPrey",
+		FullMethod: "/proto.LionService/AddPrey",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LionServiceServer).FindPrey(ctx, req.(*FindPreyRequest))
+		return srv.(LionServiceServer).AddPrey(ctx, req.(*AddPreyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LionService_GetPrey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPreyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LionServiceServer).GetPrey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.LionService/GetPrey",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LionServiceServer).GetPrey(ctx, req.(*GetPreyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -194,8 +323,12 @@ var _LionService_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*LionServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "FindPrey",
-			Handler:    _LionService_FindPrey_Handler,
+			MethodName: "AddPrey",
+			Handler:    _LionService_AddPrey_Handler,
+		},
+		{
+			MethodName: "GetPrey",
+			Handler:    _LionService_GetPrey_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
