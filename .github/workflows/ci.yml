@@ -1,17 +1,49 @@
 name: CI
-
 on: [push]
 
 jobs:
-  build:
 
+  setup:
+    name: setup
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v1
-      - name: Run a one-line script
-        run: echo Hello, world!
-      - name: Run a multi-line script
+
+      - name: set-up go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.14.4
+
+      - name: Check out code to a GOPATH compatible directory
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+          path: go/src/github.com/huytx0909/lion
+
+      - name: Debug
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          pwd
+          echo "{$GOPATH}"
+          echo "{$GOROOT}"
+          echo $USER
+          echo $HOME
+        env:
+          GOPATH: /home/runner/work/lion/go
+
+      - name: Run tests for this repo
+        run: |
+          echo $(go env)
+          sudo apt-get update -qq && sudo apt-get install -y protobuf-compiler
+          echo "{$PATH}"
+          PROJECT_PATH=$GOPATH/src/github.com/huytx0909/lion
+          sudo go get github.com/gordonklaus/ineffassign honnef.co/go/tools/cmd/staticcheck github.com/kisielk/errcheck
+          cd "${PROJECT_PATH}"
+          pwd
+          ls .
+          sudo go get ./...
+          go test ./...
+          go vet .
+          staticcheck .
+          errcheck .
+          ineffassign .
+        env:
+          GOPATH: /home/runner/work/lion/go
