@@ -26,7 +26,9 @@ func runHttp(command *cobra.Command, args []string) {
 	opts := []grpc.DialOption{grpc.WithInsecure()}
 
 	err := lion_service.RegisterLionServiceHandlerFromEndpoint(ctx, mux, "localhost:5678", opts)
-
+	if err != nil {
+		panic(err)
+	}
 	fmt.Println("listening...")
 	err = http.ListenAndServe(":1234", mux)
 	if err != nil {
