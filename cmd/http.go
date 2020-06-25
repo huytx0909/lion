@@ -3,12 +3,13 @@ package cmd
 import (
 	"context"
 	"fmt"
+	"github.com/rs/cors"
+	"net/http"
+
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/spf13/cobra"
 	"google.golang.org/grpc"
-
 	lion_service "lion/proto/proto"
-	"net/http"
 )
 
 var httpCmd = &cobra.Command{
@@ -29,8 +30,9 @@ func runHttp(command *cobra.Command, args []string) {
 	if err != nil {
 		panic(err)
 	}
+	handler := cors.AllowAll().Handler(mux)
 	fmt.Println("listening...")
-	err = http.ListenAndServe(":1234", mux)
+	err = http.ListenAndServe(":1234", handler)
 	if err != nil {
 		panic(err)
 	}
