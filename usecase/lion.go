@@ -46,7 +46,9 @@ func RegisterLionHandler(
 func Handler(msg *message.Message) ([]*message.Message, error) {
 	data := &model.Prey{}
 	err := json.Unmarshal(msg.Payload, data)
-
+	if err != nil {
+		return nil, err
+	}
 	res := fmt.Sprintf("A/An %v has been spotted", data.Name)
 	resData, err := json.Marshal(res)
 	fmt.Println(res)

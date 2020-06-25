@@ -15,5 +15,4 @@ var eatCmd = &cobra.Command{
 func hunt(command *cobra.Command, args []string) {
 	author := viper.GetString("author")
 	fmt.Println("The lion is looking for some snack! rawwww " + author)
-
 }
