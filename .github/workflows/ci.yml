@@ -1,6 +1,8 @@
+# Name for this pipeline/workflow
 name: CI
 on: [push]
 
+# Components for this workflow
 jobs:
 
   setup:
@@ -14,6 +16,7 @@ jobs:
           go-version: 1.14.4
 
       - name: Check out code to a GOPATH compatible directory
+        # Make sure our code base exists on the virtual machine of github.
         uses: actions/checkout@v1
         with:
           fetch-depth: 1
@@ -37,8 +40,6 @@ jobs:
           PROJECT_PATH=$GOPATH/src/github.com/huytx0909/lion
           sudo go get github.com/gordonklaus/ineffassign honnef.co/go/tools/cmd/staticcheck github.com/kisielk/errcheck
           cd "${PROJECT_PATH}"
-          pwd
-          ls .
           sudo go get ./...
           go test ./...
           go vet .

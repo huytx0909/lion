@@ -3,6 +3,7 @@ package infrastructure
 import (
 	"context"
 	"errors"
+	"fmt"
 	lion_service "lion/proto/proto"
 	"lion/usecase"
 )
@@ -21,6 +22,7 @@ func (l LionServiceServer) AddPrey(ctx context.Context, request *lion_service.Ad
 }
 
 func (l LionServiceServer) GetPrey(ctx context.Context, request *lion_service.GetPreyRequest) (*lion_service.GetPreyResponse, error) {
+	fmt.Print("func GetPrey")
 	if request.GetId() == "" {
 		return nil, errors.New("empty id")
 	}

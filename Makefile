@@ -3,7 +3,7 @@ hello:
 	echo "hello"
 
 build:
-	go build -o bin/lion main.go
+	go build -o ./bin/lion main.go
 
 http:
 	echo "starting http server"

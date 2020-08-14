@@ -2,11 +2,9 @@ package cmd
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/Shopify/sarama"
 	"github.com/ThreeDotsLabs/watermill/message/router/middleware"
 	"github.com/ThreeDotsLabs/watermill/message/router/plugin"
-	"lion/model"
 	"lion/usecase"
 	"os"
 	"os/signal"
@@ -87,21 +85,21 @@ func runHttpServer(command *cobra.Command, args []string) {
 	publishTopic := "lion-publish-topic"
 	usecase.RegisterLionHandler(router, subscriber, publisher, handlerName, subscribeTopic, publishTopic)
 
-	sample := &model.Prey{
-		Name:  "kangaroo",
-		Color: "blue",
-	}
-	data, err := json.Marshal(sample)
-	if err != nil {
-		panic(err)
-	}
-	err = publisher.Publish(subscribeTopic, &message.Message{
-		UUID:    watermill.NewUUID(),
-		Payload: data,
-	})
-	if err != nil {
-		panic(err)
-	}
+	//sample := &model.Prey{
+	//	Name:  "kangaroo",
+	//	Color: "blue",
+	//}
+	//data, err := json.Marshal(sample)
+	//if err != nil {
+	//	panic(err)
+	//}
+	//err = publisher.Publish(subscribeTopic, &message.Message{
+	//	UUID:    watermill.NewUUID(),
+	//	Payload: data,
+	//})
+	//if err != nil {
+	//	panic(err)
+	//}
 	ctx := context.Background()
 	if err := router.Run(ctx); err != nil {
 		panic(err)

@@ -1,18 +1,20 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
-	"google.golang.org/grpc"
-	"lion/infrastructure"
-	"lion/usecase"
+	"fmt"
 	"net"
 
+	"github.com/spf13/cobra"
+	"google.golang.org/grpc"
+
+	"lion/infrastructure"
 	lion_service "lion/proto/proto"
+	"lion/usecase"
 )
 
 var grpcCmd = &cobra.Command{
 	Use:   "grpc",
-	Short: "run http server",
+	Short: "run grpc server",
 	Run:   runGrpc,
 }
 
@@ -22,7 +24,7 @@ func runGrpc(command *cobra.Command, args []string) {
 	// UseCase
 	uc := usecase.NewLionUseCase()
 
-	lis, err := net.Listen("tcp", "localhost:5678")
+	lis, err := net.Listen("tcp", ":5678")
 	if err != nil {
 		panic(err)
 	}
@@ -31,6 +33,7 @@ func runGrpc(command *cobra.Command, args []string) {
 
 	lion_service.RegisterLionServiceServer(grpcServer, lionServer)
 
+	fmt.Println("grpc started")
 	err = grpcServer.Serve(lis)
 	if err != nil {
 		panic(err)

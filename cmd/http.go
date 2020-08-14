@@ -3,13 +3,12 @@ package cmd
 import (
 	"context"
 	"fmt"
-	"github.com/rs/cors"
-	"net/http"
-
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+	"github.com/rs/cors"
 	"github.com/spf13/cobra"
 	"google.golang.org/grpc"
 	lion_service "lion/proto/proto"
+	"net/http"
 )
 
 var httpCmd = &cobra.Command{
@@ -26,7 +25,7 @@ func runHttp(command *cobra.Command, args []string) {
 	mux := runtime.NewServeMux()
 	opts := []grpc.DialOption{grpc.WithInsecure()}
 
-	err := lion_service.RegisterLionServiceHandlerFromEndpoint(ctx, mux, "localhost:5678", opts)
+	err := lion_service.RegisterLionServiceHandlerFromEndpoint(ctx, mux, "lion:5678", opts)
 	if err != nil {
 		panic(err)
 	}
