@@ -1,5 +1,22 @@
 version: '3.7'
+
+networks:
+  app-tier:
+    driver: bridge
+
 services:
+
+  redis:
+    image: docker.io/bitnami/redis:6.0-debian-10
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data:/bitnami/redis/data
+
   lion:
     build:
       context: .
@@ -8,7 +25,9 @@ services:
       - 5678:5678
     command:
       - lion
-      - grpc
+      - redis
+    depends_on:
+      - redis
 
   lion-gw:
     build:
@@ -16,10 +35,17 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - lion
+      - redis
     expose:
       - 1234
     ports:
       - 1234:1234
+    networks:
+      - app-tier
     command:
       - lion
       - http
+
+volumes:
+  redis_data:
+    driver: local
