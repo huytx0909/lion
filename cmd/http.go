@@ -26,13 +26,19 @@ func runHttp(command *cobra.Command, args []string) {
 	mux := runtime.NewServeMux()
 	opts := []grpc.DialOption{grpc.WithInsecure()}
 
-	err := lion_service.RegisterLionServiceHandlerFromEndpoint(ctx, mux, "localhost:5678", opts)
+	grpcAddr := "localhost:5678"
+
+	err := lion_service.RegisterLionServiceHandlerFromEndpoint(ctx, mux, grpcAddr, opts)
 	if err != nil {
 		panic(err)
 	}
 	handler := cors.AllowAll().Handler(mux)
-	fmt.Println("listening...")
-	err = http.ListenAndServe(":1234", handler)
+
+	fmt.Println("http gateway started")
+
+	httpAddr := "localhost:1234"
+
+	err = http.ListenAndServe(httpAddr, handler)
 	if err != nil {
 		panic(err)
 	}
